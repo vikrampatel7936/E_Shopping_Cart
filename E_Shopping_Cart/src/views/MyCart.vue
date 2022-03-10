@@ -1,16 +1,16 @@
 <template>
    <div class="cartcontiner"><div
-      v-for="item in $store.state.arrayOfItemInCart"
-      :key="item.id"
+      v-for="data in $store.state.arrayOfItemInCart"
+      :key="data.id"
       class="product backgroundclr">
       <h1 class="text-center" style="margin-top: 20px">
-         {{ item.name }}
+         {{ data.name }}
       </h1>
       <div>
          <div class="flex-container">
             <div class="flex-img">
                <img
-                  v-bind:src="item.img"
+                  v-bind:src="data.image"
                   alt="Failed to load."
                   class="flex-img"
                />
@@ -19,20 +19,20 @@
                <div class="textpad">
                   <h5 style="margin-top: 100px">Cost:</h5>
                   <h6 class="coststyle">
-                     {{ item.cost }}
+                     {{ data.cost }}
                   </h6>
 
                   <h5 style="margin-top: 20px">Description:</h5>
                   <h6 style="text">
-                     {{ item.desc }}
+                     {{ data.description }}
                   </h6>
                   <h5 style="margin-top: 20px">Category:</h5>
                   <h6 class="categorystyle">
-                     {{ item.cat }}
+                     {{ data.category }}
                   </h6>
                   <h5 style="margin-top: 20px">Quantity:</h5>
                   <h6>
-                     {{ item.qty }}
+                     {{ data.quantity }}
                   </h6>
                   <div class="quantitystyle">
                   <input
@@ -44,7 +44,7 @@
                   /></div>
                   <br />
                   <div>
-                 <a href="#" class="badge badge-secondary" @click.prevent="removeProductFromCart(item)"> Remove </a>
+                 <a href="#" class="badge badge-secondary" @click.prevent="removeProductFromCart(data)"> Remove </a>
                </div>
                </div>
             </div>
@@ -67,10 +67,10 @@ export default {
       };
    },
    methods: {
-      removeProductFromCart(item) {
+      removeProductFromCart(data) {
          let itemIndexToRemove;
          this.$store.state.arrayOfItemInCart.find((el, index ) => {
-            if(el.id === item.id) {
+            if(el.id === data.id) {
                itemIndexToRemove = index;
             }
          })

@@ -1,3 +1,4 @@
+
 <template>
    <body>
       <div class="backgroundclr">
@@ -40,7 +41,7 @@
                   </div>
                   <br/>
                   <br/><div class="marg">
-                  <button class="register-button  margn btnclr"  id="register">Sign-up</button></div>
+                  <button class="register-button  margn btnclr" id="register">Sign-up</button></div>
                </form>
             </div>
             <div class="col-md-3"></div>

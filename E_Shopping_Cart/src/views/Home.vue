@@ -35,7 +35,7 @@
 
 <script>
 import items from '../data/products.js';
-
+// import axios from "axios";
 export default {
    name: 'Home',
    computed: {},
@@ -54,11 +54,11 @@ export default {
       this.$store.commit("setImg", currItem.img)
       this.$store.commit("setDesc", currItem.desc)
       this.$router.push('viewproduct')
-
-
       },
 
-      addToCart: function (currItem) {
+     
+   },
+    addToCart: function (currItem) {
          currItem.qty = this.qty;
 
          this.$store.commit('addItemToCart', currItem);
@@ -66,7 +66,10 @@ export default {
       removeProductFromCart(item){
         this.$store.dispatch('removeProductFromCart' , item);
       },
-   },
+     created() {
+    this.getAllProducts();
+  },
+
 };
 </script>
 

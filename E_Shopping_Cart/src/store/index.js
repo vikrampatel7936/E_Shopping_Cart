@@ -13,9 +13,11 @@ export default createStore({
     id: 1,
     name: 'Cloths',
     cost: '$100',
-    cat: 'Men',
-    img: 'can not Load',
-    desc: 'about cloths'
+    category: 'Men',
+    image: 'can not Load',
+    description: 'about cloths',
+    quantity: 0,
+
   },
   mutations: {
     setCartItems(state, cartitems) {
@@ -42,15 +44,18 @@ export default createStore({
     setCost(state, cost) {
       state.cost = cost
     },
-    setCat(state, cat) {
-      state.cat = cat
+    setCategory(state, category) {
+      state.category = category
     },
-    setImg(state, img) {
-      state.img = img
+    setImage(state, image) {
+      state.image = image
     },
-    setDesc(state, desc) {
-      state.desc = desc
-    }
+    setDescription(state, description) {
+      state.description = description
+    },
+    setQuantity(state, quantity) {
+      state.quantity = quantity
+    },
   },
   actions: {},
   modules: {},

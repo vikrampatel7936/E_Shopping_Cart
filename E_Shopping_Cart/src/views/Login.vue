@@ -32,8 +32,7 @@
                   </button>
                   
                </form>
-               <div class="hintspace">
-               Password to login for test - {{ password }}</div>
+               
             </div>
          </div>
       </div>
@@ -46,7 +45,7 @@ import { defineComponent } from 'vue';
 export default defineComponent({
    data() {
       return {
-         password: 'vikram',
+         password: '',
       }
    },
    setup() {},

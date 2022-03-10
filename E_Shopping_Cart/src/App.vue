@@ -3,11 +3,12 @@
    <div id="nav">
       <ul>
          <p class="logofont" style="float:left">E-Shop Cart</p>
-      <div class="menupadding"><router-link class="menu-item" to="/">Home</router-link> 
+      <div class="menupadding"><router-link class="menu-item" to="/product">Home</router-link>
       <router-link class="menu-item notification" to="/mycart">My Cart</router-link>
       <router-link class="menu-item" to="/profile">Profile</router-link>
       <router-link class="menu-item" to="/login">{{ $store.state.user }}</router-link> 
-      <router-link class="menu-item" to="/register">{{ $store.state.about }}</router-link></div></ul>
+      <router-link class="menu-item" to="/register">{{ $store.state.about }}</router-link>
+      </div></ul>
    </div>
    <router-view />
 </template>

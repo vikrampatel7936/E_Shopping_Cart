@@ -7,7 +7,7 @@
          <div class="flex-container">
             <div class="flex-img">
                <img
-                  v-bind:src="$store.state.img"
+                  v-bind:src="$store.state.image"
                   alt="Failed to load."
                   class="flex-img"
                />
@@ -17,37 +17,47 @@
                   <h3 style="margin-top: 100px" class="textalignment">Cost:</h3>
                   <h4 class="coststyle">{{ $store.state.cost }}</h4>
                   <h3 style="margin-top: 20px" class="textalignment">Description:</h3>
-                  <h5 style="text" class="descriptionstyle">{{ $store.state.desc }}</h5>
+                  <h5 style="text" class="descriptionstyle">{{ $store.state.description }}</h5>
                   <h3 style="margin-top: 20px" class="textalignment">Category:</h3>
-                  <h4 style="text" class="categorystyle">{{ $store.state.cat }}</h4>
-                  <h3 style="margin-top: 20px" class="textalignment">Quantity:</h3>
-                  <div class="quantitystyle"><input
-                     class="counter fieldstyle"
-                     type="number"
-                     placeholder="Quantity"
-                     min="1"
-                     id="counter"
-                  /></div>
-
-                  <br />
-                  <button class="btn btnbuy">Buy Now</button>
-                  <button class="btn btncart">Add to Cart</button>
+                  <h4 style="text" class="categorystyle">{{ $store.state.category }}</h4>
 
                   <br />
                   <br />
-
+                  <form class="borderstyle" action="" method="POST">
+                  <div class="usernamealignment">
+                     <label for="formGroupExampleInput" class="feedbackstyle"
+                        >User Name : 
+                     </label>
+                     <input
+                        type="textarea"
+                        class="username"
+                        id="username"
+                        name="username"
+                        v-model="CommentData.username"
+                     />
+                  </div>
+                  <br/>
                   <div class="feedbackalignment">
                      <label for="formGroupExampleInput" class="feedbackstyle"
                         >User Feedback : 
                      </label>
                      <input
-                        type="Feedback"
+                        type="textarea"
                         class="feedback"
-                        id="formGroupExampleInput"
+                        id="feedback"
+                        name="feedback"
+                        v-model="CommentData.feedback"
                      />
                   </div>
-                  <div class="feedstyle"><button class="btn btnfeed">Submit Feedback</button></div>
-                  <div class="uphotostyle"><button class="btn btnuphoto">Upload photo</button></div>
+                  <h3 style="margin-top: 20px" class="textalignment">Rating:</h3>
+                  <div class="ratingstyle">
+                     <select name="rating" id="rating" v-model="CommentData.rating">
+                        <option v-for="rt in Rating" :key="rt">
+                           {{rt}}
+                        </option>
+                     </select>
+                     </div></form>
+                  <div class="feedstyle"><button class="btn btnfeed" @click="AddComments()">Submit Feedback</button></div>
                </div>
             </div>
          </div>
@@ -56,15 +66,40 @@
 </template>
 
 <script>
-import items from '../data/products.js';
+import axios from "axios";
 
 export default {
    name: 'ViewProduct',
    data() {
       return {
-         items,
+         Rating:["1","2","3","4","5"],
+         model:null,
+         CommentData:{
+            username:null,
+            feedback:null,
+            rating:null
+         }
       };
    },
+   methods: {
+      AddComments(){
+         let data = new FormData();
+         data.append("username",this.CommentData.username);
+         data.append("feedback",this.CommentData.feedback);
+         data.append("rating",this.CommentData.rating);
+         axios.post("http://localhost/E_Shopping_Cart/E_Shopping_Cart/src/Api/api.php?action=addcomments",data).then((res)=>{
+            console.log(res.data);
+            if(res.data.error){
+               alert("error");
+            }else{
+               alert(res.data.message);
+               console.log(res.data.message);
+            }
+         }).catch((err)=>{
+            console.log(err);
+         })
+      }
+    },
 };
 </script>
 
@@ -76,6 +111,20 @@ export default {
    padding: 1rem;
    background-color: white;
    margin: 50px;
+}
+.borderstyle{
+   border-width: 0px;
+}
+.usernamealignment{
+   margin-left: -54%;
+   margin-right: 5px;
+}
+.username{
+   height: 30%;
+}
+.ratingstyle{
+   margin-left: -65%;
+   margin-top: -5%;
 }
 .btnbuy{
    margin-right: 25px;
@@ -93,7 +142,7 @@ export default {
 }
 .feedstyle{
    margin-top: 20px;
-   margin-left: -65%;
+   margin-left: 0%;
    margin-right: 10px;
 }
 .uphotostyle{
@@ -101,7 +150,7 @@ export default {
    margin-left: 20px;
 }
 .feedbackalignment{
-   margin-left: -31%;
+   margin-left: -33%;
    margin-right: 5px;
 }
 .btn {
@@ -139,7 +188,8 @@ export default {
    margin-left: -70%;
 }
 .descriptionstyle{
-  margin-left: 0%;
+  margin-left: 21.5%;
+  margin-top: -5%;
    
 }
 .categorystyle{
